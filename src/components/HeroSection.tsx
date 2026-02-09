@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Mail, Linkedin, MapPin, ChevronDown } from "lucide-react";
+import { Mail, Linkedin, MapPin, ChevronDown, Download } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => {
@@ -48,7 +48,7 @@ const HeroSection = () => {
             </a>
           </div>
 
-          <div className="flex gap-4 justify-center">
+          <div className="flex flex-wrap gap-4 justify-center">
             <a
               href="#experiencia"
               className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-mono text-sm font-medium rounded-lg hover:brightness-110 transition-all glow-green"
@@ -56,8 +56,16 @@ const HeroSection = () => {
               Ver Experiencia
             </a>
             <a
-              href="#contacto"
+              href="/cv-smail-fahmi.pdf"
+              download
               className="inline-flex items-center gap-2 px-6 py-3 border border-primary/30 text-primary font-mono text-sm font-medium rounded-lg hover:bg-primary/10 transition-all"
+            >
+              <Download className="w-4 h-4" />
+              Descargar CV
+            </a>
+            <a
+              href="#contacto"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-border text-muted-foreground font-mono text-sm font-medium rounded-lg hover:text-primary hover:border-primary/30 transition-all"
             >
               Contactar
             </a>
