@@ -1,4 +1,4 @@
-User-agent: Googlebot
+echo "User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
@@ -11,4 +11,4 @@ User-agent: facebookexternalhit
 Allow: /
 
 User-agent: *
-Allow: /
+Allow: /" > ./public/robots.txt
