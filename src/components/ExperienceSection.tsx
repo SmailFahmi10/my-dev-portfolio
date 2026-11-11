@@ -1,129 +1,120 @@
-import { motion } from "framer-motion";
-import { Briefcase } from "lucide-react";
+import Section from "@/components/Section";
 
-const experiences = [
+interface Experience {
+  company: string;
+  role: string;
+  project?: string;
+  period: string;
+  location?: string;
+  points: string[];
+  tech: string[];
+}
+
+const experiences: Experience[] = [
   {
     company: "Serbatic",
-    role: "Software Development & Maintenance (Backend Focus)",
-    period: "Jul 2024 – Presente",
-    location: "Zamora",
+    role: "Backend software development",
+    project: "Microservicios de integración de eventos, sector seguros",
+    period: "Sep 2025 – hoy",
     points: [
-      "Construcción y optimización de servicios backend con Java Spring Boot, aplicando Arquitectura Limpia y patrones de diseño.",
-      "Mejora de escalabilidad y mantenibilidad mediante refactorización, reduciendo deuda técnica.",
-      "Soporte L2/L3, resolución de incidentes complejos y coordinación de despliegues.",
-      "Colaboración con equipos de DevOps e Ingeniería para mejoras en aplicaciones corporativas.",
+      "Desarrollo microservicios Java y Spring Boot que consumen mensajería asíncrona (AMQP) para automatizar flujos de negocio críticos.",
+      "Integro los servicios con sistemas core de negocio para generación documental y gestión de datos maestros.",
+      "Diagnostico y resuelvo incidencias de conectividad en tiempo real en Kubernetes (Azure AKS).",
+      "Optimizo consultas Oracle SQL para procesar grandes volúmenes de datos.",
+      "Resuelvo problemas de estabilidad en Kubernetes (Helm, KEDA, nodos Spot) para mejorar la resiliencia en producción.",
+      "Colaboro con los equipos DevOps en pipelines CI/CD y despliegues GitOps con ArgoCD.",
     ],
-    tech: ["Java", "Spring Boot", "Microservicios", "REST APIs", "SQL"],
+    tech: ["Java 21", "Spring Boot", "AMQP", "Oracle SQL", "Kubernetes (AKS)", "Helm", "KEDA", "ArgoCD"],
   },
   {
     company: "Serbatic",
-    role: "Junior Software Developer",
+    role: "Backend software development",
+    project: "Soporte y mantenimiento Java, sector automoción",
+    period: "Jul 2024 – Ago 2025",
+    location: "Zamora",
+    points: [
+      "Desarrollo y mantenimiento de aplicaciones corporativas en Java y Spring Boot, reduciendo deuda técnica con refactorizaciones continuas.",
+      "Resolución de incidencias L2/L3 en contacto directo con el cliente, mejorando tiempos de resolución y estabilidad.",
+      "Análisis y corrección de datos en Oracle (SQL y PL/SQL) para resolver inconsistencias críticas en procesos de negocio.",
+      "Evolutivos de extremo a extremo, backend y frontend con Angular o React, desde la toma de requisitos hasta el despliegue.",
+      "Campañas digitales integradas con sistemas CRM para la captación de leads.",
+      "Documentación técnica y funcional junto a los stakeholders, reduciendo retrabajos.",
+    ],
+    tech: ["Java", "Spring Boot", "Oracle SQL", "PL/SQL", "Angular", "React"],
+  },
+  {
+    company: "Serbatic",
+    role: "Junior backend developer",
+    project: "Comercio electrónico full stack",
     period: "Feb 2024 – Jun 2024",
     location: "Zamora",
     points: [
-      "Lideré el desarrollo integral de una solución de e-commerce, desde concepción hasta despliegue.",
-      "Backend seguro con Java Servlets y Spring Boot, aplicando Clean Code.",
-      "Frontend moderno con React + TypeScript, useReducer, hooks personalizados y shadcn/ui.",
-      "Diseño y optimización de Microservicios y APIs RESTful.",
+      "Lideré el desarrollo integral de una solución de comercio electrónico, desde su concepción hasta su despliegue.",
+      "Servicios backend seguros con Java Servlets y Spring Boot, aplicando Clean Code y buenas prácticas de SQL.",
+      "Interfaces con React y TypeScript: useReducer, hooks personalizados, shadcn/ui y Tailwind CSS.",
+      "Diseño y optimización de microservicios y APIs RESTful.",
+      "Documentación técnica y apoyo en los despliegues para minimizar el tiempo de inactividad.",
     ],
-    tech: ["Java", "Spring Boot", "React", "TypeScript", "SQL"],
+    tech: ["Java", "Spring Boot", "Servlets", "React", "TypeScript", "SQL"],
   },
   {
     company: "Tymr",
-    role: "Solar PV Maintenance Technician",
+    role: "Técnico de mantenimiento",
     period: "Jun 2022 – Feb 2023",
     location: "Zamora",
-    points: [
-      "Diagnósticos avanzados y resolución de problemas en sistemas electrónicos distribuidos.",
-      "Instalación y configuración de seguidores solares y sistemas conectados a la red.",
-      "Registro de datos y análisis de rendimiento para optimizar eficiencia.",
-    ],
-    tech: ["Diagnóstico", "Integración de sistemas", "Análisis de datos"],
+    points: ["Resolución de problemas en sistemas electrónicos distribuidos mediante diagnóstico avanzado."],
+    tech: [],
   },
   {
     company: "Cobadu",
-    role: "Industrial Installation Technician",
+    role: "Técnico industrial",
     period: "Jul 2021 – May 2022",
     location: "Zamora",
-    points: [
-      "Diseño e implementación de sistemas de automatización PLC/SCADA (SIMATIC S7).",
-      "Desarrollo de sistemas de control en tiempo real para ventilación y refrigeración.",
-      "Mantenimiento preventivo y correctivo en equipos críticos.",
-    ],
-    tech: ["PLC", "SCADA", "SIMATIC S7", "Control en tiempo real"],
+    points: ["Diseño de lógica de sistemas y máquinas de estado mediante programación secuencial (PLC/SCADA)."],
+    tech: [],
+  },
+  {
+    company: "Audens Food",
+    role: "Técnico en mantenimiento industrial",
+    period: "Ene 2021 – Jun 2021",
+    points: [],
+    tech: [],
   },
 ];
 
-const ExperienceSection = () => {
-  return (
-    <section id="experiencia" className="py-24 px-6 bg-muted/30">
-      <div className="container mx-auto max-w-5xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+const ExperienceSection = () => (
+  <Section id="experiencia" title="Experiencia">
+    <ol>
+      {experiences.map((exp) => (
+        <li
+          key={`${exp.company}-${exp.period}`}
+          className="grid gap-x-8 gap-y-3 border-b py-8 first:pt-0 last:border-b-0 last:pb-0 lg:grid-cols-[12rem_1fr]"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">
-            <span className="text-primary font-mono text-lg block mb-1">{"// "}</span>
-            Experiencia
-          </h2>
-        </motion.div>
-
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-[19px] top-0 bottom-0 w-px bg-border md:left-[19px]" />
-
-          <div className="space-y-10">
-            {experiences.map((exp, i) => (
-              <motion.div
-                key={`${exp.company}-${exp.role}`}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="relative pl-12"
-              >
-                {/* Timeline dot */}
-                <div className="absolute left-2.5 top-1.5 w-4 h-4 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                </div>
-
-                <div className="bg-card border border-border rounded-lg p-6 hover:border-glow transition-colors">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
-                    <div>
-                      <h3 className="text-lg font-semibold text-foreground">{exp.role}</h3>
-                      <p className="text-primary font-mono text-sm flex items-center gap-2">
-                        <Briefcase className="w-3.5 h-3.5" />
-                        {exp.company} · {exp.location}
-                      </p>
-                    </div>
-                    <span className="text-muted-foreground text-sm font-mono mt-1 md:mt-0">
-                      {exp.period}
-                    </span>
-                  </div>
-                  <ul className="space-y-2 mb-4">
-                    {exp.points.map((point, j) => (
-                      <li key={j} className="text-sm text-muted-foreground flex gap-2">
-                        <span className="text-primary mt-1 shrink-0">▸</span>
-                        {point}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="flex flex-wrap gap-2">
-                    {exp.tech.map((t) => (
-                      <span key={t} className="px-2 py-1 text-xs bg-primary/10 text-primary rounded font-mono">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          <p className="font-mono text-sm leading-6 text-muted-foreground">
+            {exp.period}
+            {exp.location && (
+              <span className="lg:block"><span className="lg:hidden"> · </span>{exp.location}</span>
+            )}
+          </p>
+          <div>
+            <h3 className="text-xl font-semibold leading-6">{exp.role}</h3>
+            <p className="mt-1 font-medium text-primary">{exp.company}</p>
+            {exp.project && <p className="mt-1 text-sm text-muted-foreground">{exp.project}</p>}
+            {exp.points.length > 0 && (
+              <ul className="mt-4 max-w-[68ch] space-y-2 text-[0.9375rem] leading-relaxed text-muted-foreground">
+                {exp.points.map((point) => (
+                  <li key={point} className="relative pl-5 before:absolute before:left-0 before:content-['–']">
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            )}
+            {exp.tech.length > 0 && <p className="mt-4 font-mono text-xs leading-5">{exp.tech.join(" · ")}</p>}
           </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+        </li>
+      ))}
+    </ol>
+  </Section>
+);
 
 export default ExperienceSection;

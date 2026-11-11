@@ -1,88 +1,75 @@
-import { motion } from "framer-motion";
-import { Mail, Linkedin, MapPin, ChevronDown, Download } from "lucide-react";
-import heroBg from "@/assets/hero-bg.jpg";
+import { ArrowRight, Download } from "lucide-react";
+import CareerTrack from "@/components/CareerTrack";
+import { profile } from "@/lib/profile";
 
-const HeroSection = () => {
-  return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <img src={heroBg} alt="" className="w-full h-full object-cover opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/80 to-background" />
-      </div>
+// Cajetín, como el de un plano: los datos que identifican la "pieza".
+const titleBlock = [
+  { term: "Rol", value: "Java backend engineer" },
+  { term: "Empresa", value: "Serbatic, desde 2024" },
+  { term: "Sectores", value: "Seguros y automoción" },
+  { term: "Stack", value: "Java 21, Spring Boot, Kafka y AMQP, Kubernetes (AKS), Oracle SQL" },
+  { term: "Base", value: profile.location },
+  { term: "Idiomas", value: "Español, inglés, árabe darija" },
+];
 
-      <div className="relative z-10 container mx-auto px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <p className="font-mono text-primary text-sm md:text-base mb-4 tracking-widest">
-            {">"} hello_world<span className="animate-blink">_</span>
+const HeroSection = () => (
+  <section id="inicio" className="relative scroll-mt-14">
+    <div className="sheet-grid pointer-events-none absolute inset-0" aria-hidden="true" />
+
+    <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-14 sm:px-8 md:pb-24 md:pt-24">
+      <h1 className="display text-[clamp(2.5rem,9.5vw,6.75rem)]">
+        Smail Fahmi <span className="whitespace-nowrap">Charnane</span>
+      </h1>
+
+      <div className="mt-10 grid gap-x-8 gap-y-10 md:mt-14 md:grid-cols-12">
+        <div className="md:col-span-7">
+          <p className="max-w-[36ch] text-xl font-medium leading-snug md:text-2xl">
+            Backend engineer en Java. Microservicios Spring Boot orientados a eventos, en producción sobre Kubernetes
+            y Oracle.
+          </p>
+          <p className="mt-5 max-w-[58ch] leading-relaxed text-muted-foreground">
+            Llevo más de dos años desarrollando microservicios para clientes de seguros y automoción: mensajería
+            asíncrona, integración con sistemas core, consultas SQL sobre grandes volúmenes de datos e incidencias en
+            producción. Antes de programar fui técnico de mecatrónica industrial. De ahí viene mi forma de
+            diagnosticar problemas en sistemas que no pueden pararse.
           </p>
 
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 tracking-tight">
-            Smail Fahmi{" "}
-            <span className="text-gradient">Charnane</span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-            Backend Developer especializado en{" "}
-            <span className="text-primary font-medium">Java</span> &{" "}
-            <span className="text-primary font-medium">Spring Boot</span>
-            {" "}con experiencia fullstack en React + TypeScript
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground mb-12">
-            <span className="flex items-center gap-1.5">
-              <MapPin className="w-4 h-4 text-primary" />
-              Alicante, España
-            </span>
-            <a href="mailto:smailfahmi984@gmail.com" className="flex items-center gap-1.5 hover:text-primary transition-colors">
-              <Mail className="w-4 h-4 text-primary" />
-              smailfahmi984@gmail.com
-            </a>
-            <a href="https://www.linkedin.com/in/smailfahmicharnane" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-primary transition-colors">
-              <Linkedin className="w-4 h-4 text-primary" />
-              LinkedIn
-            </a>
-          </div>
-
-          <div className="flex flex-wrap gap-4 justify-center">
-            <a
-              href="#experiencia"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground font-mono text-sm font-medium rounded-lg hover:brightness-110 transition-all glow-green"
-            >
-              Ver Experiencia
-            </a>
-            <a
-              href="/cv-smail-fahmi.pdf"
-              download
-              className="inline-flex items-center gap-2 px-6 py-3 border border-primary/30 text-primary font-mono text-sm font-medium rounded-lg hover:bg-primary/10 transition-all"
-            >
-              <Download className="w-4 h-4" />
-              Descargar CV
-            </a>
+          <div className="mt-8 flex flex-wrap gap-3">
             <a
               href="#contacto"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-border text-muted-foreground font-mono text-sm font-medium rounded-lg hover:text-primary hover:border-primary/30 transition-all"
+              className="inline-flex items-center gap-2 rounded bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-foreground"
             >
-              Contactar
+              Escríbeme
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </a>
+            <a
+              href={profile.cv}
+              download
+              className="inline-flex items-center gap-2 rounded border border-foreground px-5 py-3 text-sm font-semibold transition-colors hover:bg-foreground hover:text-background"
+            >
+              <Download className="h-4 w-4" aria-hidden="true" />
+              Descargar CV
             </a>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 1 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <ChevronDown className="w-6 h-6 text-primary/50 animate-bounce" />
-        </motion.div>
+        <dl className="self-start border border-foreground bg-card md:col-span-5">
+          {titleBlock.map((row) => (
+            <div key={row.term} className="grid grid-cols-[6.5rem_1fr] border-b border-foreground last:border-b-0">
+              <dt className="border-r border-foreground px-3 py-2.5 font-mono text-xs leading-5 text-muted-foreground">
+                {row.term}
+              </dt>
+              <dd className="px-3 py-2.5 text-sm font-medium leading-5">{row.value}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
-    </section>
-  );
-};
+
+      <div className="mt-16 md:mt-24">
+        <CareerTrack />
+      </div>
+    </div>
+  </section>
+);
 
 export default HeroSection;

@@ -1,77 +1,49 @@
-import { motion } from "framer-motion";
-import { Mail, Phone, Linkedin, MapPin } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { profile } from "@/lib/profile";
 
-const ContactSection = () => {
-  return (
-    <section id="contacto" className="py-24 px-6 bg-muted/30">
-      <div className="container mx-auto max-w-3xl text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="text-primary font-mono text-lg block mb-1">{"// "}</span>
-            Contacto
-          </h2>
-          <p className="text-muted-foreground mb-12">
-            ¿Tienes un proyecto interesante o una oportunidad? No dudes en contactarme.
-          </p>
-        </motion.div>
+const channels = [
+  { label: "Teléfono", value: profile.phoneLabel, href: `tel:${profile.phone}`, external: false },
+  { label: "LinkedIn", value: profile.linkedinLabel, href: profile.linkedin, external: true },
+  { label: "CV en PDF", value: "Descargar", href: profile.cv, external: false, download: true },
+];
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-        >
-          <a
-            href="mailto:smailfahmi984@gmail.com"
-            className="bg-card border border-border rounded-lg p-6 flex items-center gap-4 hover:border-glow transition-colors group"
-          >
-            <Mail className="w-5 h-5 text-primary" />
-            <div className="text-left">
-              <p className="text-xs text-muted-foreground font-mono">Email</p>
-              <p className="text-sm text-foreground group-hover:text-primary transition-colors">smailfahmi984@gmail.com</p>
-            </div>
-          </a>
+const ContactSection = () => (
+  <section id="contacto" aria-labelledby="contacto-titulo" className="on-ink scroll-mt-14 bg-foreground text-background">
+    <div className="mx-auto max-w-6xl px-5 pb-10 pt-20 sm:px-8 md:pb-12 md:pt-28">
+      <h2 id="contacto-titulo" className="heading text-2xl md:text-[1.75rem]">
+        Contacto
+      </h2>
+      <p className="mt-4 max-w-[52ch] leading-relaxed text-background/70">
+        Si tienes un proyecto o una vacante en la que crees que encajo, escríbeme.
+      </p>
 
-          <a
-            href="tel:+34676249297"
-            className="bg-card border border-border rounded-lg p-6 flex items-center gap-4 hover:border-glow transition-colors group"
-          >
-            <Phone className="w-5 h-5 text-primary" />
-            <div className="text-left">
-              <p className="text-xs text-muted-foreground font-mono">Teléfono</p>
-              <p className="text-sm text-foreground group-hover:text-primary transition-colors">676 249 297</p>
-            </div>
-          </a>
+      <a
+        href={`mailto:${profile.email}`}
+        className="display mt-10 inline-block break-all text-[clamp(1.5rem,5.2vw,3.75rem)] underline decoration-signal-on-ink decoration-2 underline-offset-[0.18em] transition-colors hover:text-signal-on-ink"
+      >
+        {profile.email}
+      </a>
 
-          <a
-            href="https://www.linkedin.com/in/smailfahmicharnane"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-card border border-border rounded-lg p-6 flex items-center gap-4 hover:border-glow transition-colors group"
-          >
-            <Linkedin className="w-5 h-5 text-primary" />
-            <div className="text-left">
-              <p className="text-xs text-muted-foreground font-mono">LinkedIn</p>
-              <p className="text-sm text-foreground group-hover:text-primary transition-colors">/in/smailfahmicharnane</p>
-            </div>
-          </a>
-
-          <div className="bg-card border border-border rounded-lg p-6 flex items-center gap-4">
-            <MapPin className="w-5 h-5 text-primary" />
-            <div className="text-left">
-              <p className="text-xs text-muted-foreground font-mono">Ubicación</p>
-              <p className="text-sm text-foreground">Alicante, España</p>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-};
+      <ul className="mt-14 grid border border-background/25 sm:grid-cols-3">
+        {channels.map((c) => (
+          <li key={c.label} className="border-b border-background/25 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0">
+            <a
+              href={c.href}
+              download={c.download}
+              {...(c.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="group flex items-start justify-between gap-4 px-5 py-5"
+            >
+              <span>
+                <span className="block font-mono text-xs text-background/60">{c.label}</span>
+                <span className="mt-1 block font-medium transition-colors group-hover:text-signal-on-ink">{c.value}</span>
+              </span>
+              <ArrowUpRight className="mt-1 h-4 w-4 shrink-0 text-background/50 transition-colors group-hover:text-signal-on-ink" aria-hidden="true" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+);
 
 export default ContactSection;

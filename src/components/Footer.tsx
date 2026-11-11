@@ -1,9 +1,10 @@
+import { profile } from "@/lib/profile";
+
 const Footer = () => (
-  <footer className="py-8 px-6 border-t border-border">
-    <div className="container mx-auto text-center">
-      <p className="text-sm text-muted-foreground font-mono">
-        © 2025 Smail Fahmi Charnane · Built with React + TypeScript
-      </p>
+  <footer className="bg-foreground text-background">
+    <div className="mx-auto flex max-w-6xl flex-wrap justify-between gap-x-8 gap-y-2 px-5 pb-8 pt-0 font-mono text-xs text-background/60 sm:px-8">
+      <p>© {new Date().getFullYear()} {profile.name}</p>
+      <p>{profile.location}</p>
     </div>
   </footer>
 );

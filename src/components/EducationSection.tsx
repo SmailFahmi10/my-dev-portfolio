@@ -1,80 +1,49 @@
-import { motion } from "framer-motion";
-import { GraduationCap, Award } from "lucide-react";
+import Section from "@/components/Section";
 
 const education = [
   {
-    school: "I.E.S Claudio Moyano",
-    degree: "FPS Desarrollo de Aplicaciones Web (DAW)",
+    title: "FPS Desarrollo de Aplicaciones Web (DAW)",
+    place: "I.E.S. Claudio Moyano · MySQL, Spring Boot, JavaScript, Git, HTML",
     period: "Sep 2022 – May 2024",
-    details: "MySQL, Spring Boot, JavaScript, Git, HTML",
   },
   {
-    school: "I.E.S Universidad Laboral",
-    degree: "FPS Mecatrónica Industrial",
+    title: "FPS Mecatrónica Industrial",
+    place: "I.E.S. Universidad Laboral · PLC, SIMATIC STEP 7",
     period: "Sep 2019 – Jun 2021",
-    details: "PLC, SIMATIC STEP 7",
+    award: "Medalla de oro en Mecatrónica, CYLSkills",
   },
   {
-    school: "I.E.S Poeta Claudio Rodríguez",
-    degree: "Bachillerato, Ciencias Tecnológicas",
+    title: "Bachillerato, Ciencias Tecnológicas",
+    place: "I.E.S. Poeta Claudio Rodríguez",
     period: "Sep 2017 – Jun 2019",
-    details: "",
+  },
+  {
+    title: "Certificación profesional: Eléctrico y electrónico del vehículo",
+    place: "TMVG0209",
+    period: "Ene 2018 – Jul 2018",
   },
 ];
 
-const EducationSection = () => {
-  return (
-    <section id="educacion" className="py-24 px-6">
-      <div className="container mx-auto max-w-5xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">
-            <span className="text-primary font-mono text-lg block mb-1">{"// "}</span>
-            Educación & Certificaciones
-          </h2>
-        </motion.div>
-
-        <div className="grid gap-6 mb-10">
-          {education.map((edu, i) => (
-            <motion.div
-              key={edu.school}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-card border border-border rounded-lg p-6 flex gap-4 hover:border-glow transition-colors"
-            >
-              <GraduationCap className="w-6 h-6 text-primary shrink-0 mt-1" />
-              <div>
-                <h3 className="font-semibold text-foreground">{edu.degree}</h3>
-                <p className="text-primary font-mono text-sm">{edu.school}</p>
-                <p className="text-muted-foreground text-sm mt-1">{edu.period}</p>
-                {edu.details && (
-                  <p className="text-muted-foreground text-sm mt-2 font-mono">{edu.details}</p>
-                )}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-card border border-primary/20 rounded-lg p-6 flex gap-4 glow-green"
-        >
-          <Award className="w-6 h-6 text-primary shrink-0 mt-1" />
+const EducationSection = () => (
+  <Section id="formacion" title="Formación">
+    <ul className="border-t border-foreground">
+      {education.map((e) => (
+        <li key={e.title} className="grid gap-x-8 gap-y-1 border-b py-5 lg:grid-cols-[12rem_1fr]">
+          <p className="font-mono text-sm leading-6 text-muted-foreground">{e.period}</p>
           <div>
-            <h3 className="font-semibold text-foreground">Medalla de Oro en Mecatrónica</h3>
-            <p className="text-primary font-mono text-sm">CYLSkills</p>
+            <h3 className="font-semibold leading-6">{e.title}</h3>
+            <p className="mt-0.5 text-muted-foreground">{e.place}</p>
+            {e.award && (
+              <p className="mt-2 flex items-center gap-2 text-sm font-medium text-primary">
+                <span className="h-2 w-2 rounded-full bg-primary" aria-hidden="true" />
+                {e.award}
+              </p>
+            )}
           </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-};
+        </li>
+      ))}
+    </ul>
+  </Section>
+);
 
 export default EducationSection;
